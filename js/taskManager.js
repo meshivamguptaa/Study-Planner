@@ -12,7 +12,7 @@ function addTask(){
         category: categorySelect.value,
         priority: prioritySelect.value,
         dueDate: dueDateInput.value,
-        completed: false
+        Status: false
     }
     tasks.push(task)
     renderTasks()
@@ -38,10 +38,20 @@ function renderTasks(){
         const deleteBtn = document.createElement("button")
         deleteBtn.textContent = "Delete Task"
 
+        deleteBtn.addEventListener("click", () => {
+            deleteTask(tsk.id)
+        })
+
         li.appendChild(editBtn)
         li.appendChild(deleteBtn)
         taskList.appendChild(li)
 
 
     })
+}
+
+function deleteTask(id){
+    tasks = tasks.filter(task=>task.id !== id)
+
+    renderTasks()
 }
