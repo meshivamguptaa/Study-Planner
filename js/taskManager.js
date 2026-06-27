@@ -24,6 +24,10 @@ function addTask(){
 function renderTasks(){
     taskList.innerHTML = ""
 
+    if(tasks.length===0){
+    taskList.textContent = "No tasks yet. Add you first task."
+}
+
     tasks.forEach((tsk) => {
 
         let status
