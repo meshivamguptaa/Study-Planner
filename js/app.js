@@ -13,5 +13,10 @@ const taskList = document.getElementById("taskList")
 
 renderTasks()
 addTaskbtn.addEventListener("click", () => {
-    addTask()
+    if(editingTaskId===null){
+        addTask()
+    }
+    else{
+        updateTask()
+    }
 })
