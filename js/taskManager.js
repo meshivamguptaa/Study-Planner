@@ -82,6 +82,8 @@ function renderTasks(){
         li.appendChild(toggleBtn)
         taskList.appendChild(li)
 
+        renderStats()
+
 
     })
 }
@@ -137,5 +139,16 @@ function updateTask(){
     addTaskbtn.textContent = "Add Task"
 
 }
+
+function renderStats(){
+    const total = tasks.length
+    const completed = tasks.filter(task => task.completed === true).length
+    const pending = tasks.filter(task => task.completed === false).length
+    totalCount.textContent = `Total: ${total}`
+    completedCount.textContent = `Completed: ${completed}`
+    pendingCount.textContent = `Pending: ${pending}`
+
+}
+
 
 
