@@ -15,6 +15,7 @@ function addTask(){
         completed: false
     }
     tasks.push(task)
+    saveTasks()
     renderTasks()
     titleInput.value=""
     descriptionInput.value=""
@@ -79,12 +80,15 @@ function renderTasks(){
 
 function deleteTask(id){
     tasks = tasks.filter(task=>task.id !== id)
+    saveTasks()
 
     renderTasks()
 }
 function toggleComplete(id){
     const task = tasks.find(task => task.id === id)
     task.completed = !task.completed
+
+    saveTasks()
 
     renderTasks()
 }
