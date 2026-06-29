@@ -115,6 +115,8 @@ Through this project, I learned:
 * Calendar View
 * Notifications and Reminders
 
+Live link: https://studyplannerjs.netlify.app/
+
 ## Author
 
 Shivam Gupta
