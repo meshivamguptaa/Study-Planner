@@ -14,7 +14,8 @@ const completedCount = document.getElementById("completed")
 const pendingCount = document.getElementById("pending")
 
 
-renderTasks()
+
+renderTasks(tasks)
 addTaskbtn.addEventListener("click", () => {
     if(editingTaskId===null){
         addTask()
