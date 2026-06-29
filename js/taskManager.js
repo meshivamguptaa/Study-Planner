@@ -1,4 +1,4 @@
-
+let editingTaskId = null
 
 function addTask(){
     if(titleInput.value=="".trim()){
@@ -19,6 +19,9 @@ function addTask(){
     renderTasks()
     titleInput.value=""
     descriptionInput.value=""
+    categorySelect.value = "DSA"
+    prioritySelect.value = "None"
+    dueDateInput.value = ""
     console.log(task)
 }
 
@@ -69,10 +72,17 @@ function renderTasks(){
             deleteTask(tsk.id)
         })
 
+        editBtn.addEventListener("click", () => {
+            editTask(tsk.id)
+            
+        })
+
         li.appendChild(editBtn)
         li.appendChild(deleteBtn)
         li.appendChild(toggleBtn)
         taskList.appendChild(li)
+
+        renderStats()
 
 
     })
@@ -92,3 +102,53 @@ function toggleComplete(id){
 
     renderTasks()
 }
+
+function editTask(id){
+    editingTaskId=id
+
+    if(editingTaskId !== null){
+        addTaskbtn.textContent = "Update Task"
+    }
+
+    const task = tasks.find(task=>task.id===editingTaskId)
+    titleInput.value = task.title
+    descriptionInput.value = task.description
+    categorySelect.value = task.category
+    prioritySelect.value = task.priority
+    dueDateInput.value = task.dueDate
+
+}
+function updateTask(){
+    const task = tasks.find(task => task.id===editingTaskId)
+    task.title = titleInput.value
+    task.description = descriptionInput.value
+    task.category = categorySelect.value
+    task.priority = prioritySelect.value
+    task.dueDate = dueDateInput.value
+
+    saveTasks()
+    renderTasks()
+    editingTaskId = null
+
+    titleInput.value=""
+    descriptionInput.value=""
+    categorySelect.value = "DSA"
+    prioritySelect.value = "None"
+    dueDateInput.value = ""
+
+    addTaskbtn.textContent = "Add Task"
+
+}
+
+function renderStats(){
+    const total = tasks.length
+    const completed = tasks.filter(task => task.completed === true).length
+    const pending = tasks.filter(task => task.completed === false).length
+    totalCount.textContent = `Total: ${total}`
+    completedCount.textContent = `Completed: ${completed}`
+    pendingCount.textContent = `Pending: ${pending}`
+
+}
+
+
+

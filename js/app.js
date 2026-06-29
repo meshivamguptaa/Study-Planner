@@ -9,9 +9,17 @@ const prioritySelect = document.getElementById("priority")
 const dueDateInput = document.getElementById("dueDate")
 const addTaskbtn = document.getElementById("addTaskBtn")
 const taskList = document.getElementById("taskList")
+const totalCount = document.getElementById("total")
+const completedCount = document.getElementById("completed")
+const pendingCount = document.getElementById("pending")
 
 
 renderTasks()
 addTaskbtn.addEventListener("click", () => {
-    addTask()
+    if(editingTaskId===null){
+        addTask()
+    }
+    else{
+        updateTask()
+    }
 })
