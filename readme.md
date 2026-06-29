@@ -83,8 +83,7 @@ A feature-rich Study Planner built with Vanilla JavaScript that helps students o
 Study-Planner/
 │
 ├── index.html
-├── css/
-│   └── style.css
+├── style.css
 │
 ├── js/
 │   ├── app.js
