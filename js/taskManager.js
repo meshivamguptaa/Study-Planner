@@ -1,5 +1,9 @@
 let editingTaskId = null
 const searchInput = document.getElementById("search")
+const totalCount = document.getElementById("total")
+const completedCount = document.getElementById("completed")
+const pendingCount = document.getElementById("pending")
+
 
 function addTask(){
     if(titleInput.value=="".trim()){
@@ -151,6 +155,17 @@ function renderStats(){
 
 }
 
+totalCount.addEventListener("click", () => {
+    renderTasks(tasks)
+})
+
+completedCount.addEventListener("click", () => {
+    filterCompletedTasks()
+})
+pendingCount.addEventListener("click", () => {
+    filterPendingTasks()
+})
+
 searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase()
     const filteredTasks= tasks.filter(task=>
@@ -161,5 +176,15 @@ searchInput.addEventListener("input", () => {
 
 })
 
+function filterCompletedTasks(){
+    const filterCompleted = tasks.filter(task => task.completed===true)
+    renderTasks(filterCompleted)
+
+}
+function filterPendingTasks(){
+    const filterPending = tasks.filter(task => task.completed===false)
+    renderTasks(filterPending)
+
+}
 
 
