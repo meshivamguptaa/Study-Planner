@@ -1,4 +1,5 @@
 let editingTaskId = null
+const searchInput = document.getElementById("search")
 
 function addTask(){
     if(titleInput.value=="".trim()){
@@ -16,7 +17,7 @@ function addTask(){
     }
     tasks.push(task)
     saveTasks()
-    renderTasks()
+    renderTasks(tasks)
     titleInput.value=""
     descriptionInput.value=""
     categorySelect.value = "DSA"
@@ -25,14 +26,14 @@ function addTask(){
     console.log(task)
 }
 
-function renderTasks(){
+function renderTasks(tasksToRender){
     taskList.innerHTML = ""
 
     if(tasks.length===0){
     taskList.textContent = "No tasks yet. Add you first task."
 }
 
-    tasks.forEach((tsk) => {
+    tasksToRender.forEach((tsk) => {
 
         let status
         if(tsk.completed){
@@ -92,7 +93,7 @@ function deleteTask(id){
     tasks = tasks.filter(task=>task.id !== id)
     saveTasks()
 
-    renderTasks()
+    renderTasks(tasks)
 }
 function toggleComplete(id){
     const task = tasks.find(task => task.id === id)
@@ -100,7 +101,7 @@ function toggleComplete(id){
 
     saveTasks()
 
-    renderTasks()
+    renderTasks(tasks)
 }
 
 function editTask(id){
@@ -127,7 +128,7 @@ function updateTask(){
     task.dueDate = dueDateInput.value
 
     saveTasks()
-    renderTasks()
+    renderTasks(tasks)
     editingTaskId = null
 
     titleInput.value=""
@@ -149,6 +150,16 @@ function renderStats(){
     pendingCount.textContent = `Pending: ${pending}`
 
 }
+
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase()
+    const filteredTasks= tasks.filter(task=>
+         task.title.toLowerCase().includes(searchTerm) || 
+        task.description.toLowerCase().includes(searchTerm))
+
+        renderTasks(filteredTasks)
+
+})
 
 
 
